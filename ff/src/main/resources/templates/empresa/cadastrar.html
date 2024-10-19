@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feira Virtual SENAC 2020 | Projeto Integrador Template</title>
+    <th:block th:insert="~{/fragments/head :: head}"></th:block>
+    <!-- Sweet-Alert  -->
+    <link th:href="@{/statics/plugins/sweet-alert2/sweetalert2.min.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="page-wrapper">
+
+    <!-- Top Bar Start -->
+    <th:block th:insert="~{/fragments/topbar :: topbar}"></th:block>
+    <!-- Top Bar End -->
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+        <!--left navigation start-->
+        <th:block th:insert="~{/fragments/sidebar :: sidebar}"></th:block>
+        <!--left navigation end-->
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="m-b-20 header-title">Cadastrar Empresa</h4>
+                    </div>
+                </div>
+
+                <form th:object="${empresa}" th:action="@{/empresa/salvar}" method="POST">
+                    <input th:field="*{empresaId}" type="hidden" />
+                    <fieldset>
+                        <legend>Dados da Empresa</legend>
+                        <div class="form-row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label>Nome Fantansia</label>
+                                    <input th:field="*{empresaNome}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label>Razão Social</label>
+                                    <input th:field="*{empresaRazaoSocial}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label>CNPJ</label>
+                                <div class="form-group">
+                                    <input th:field="*{empresaCnpj}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label>Responsável Legal</label>
+                                <div class="form-group">
+                                    <input th:field="*{empresaResponsavelLegal}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label>Descrição</label>
+                                <div class="form-group">
+                                                <textarea class="form-control" rows="5"
+                                                          th:field="*{empresaDescricao}"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label>Porte</label>
+                                <div class="form-group">
+                                    <input type th:field="*{empresaPorte}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label>Numero de Funcionários</label>
+                                <div class="form-group">
+                                    <input type="number" th:field="*{empresaNumFuncionarios}"
+                                           class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    <input type="email" th:field="*{empresaEmail}"
+                                           class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Site</label>
+                                    <input th:field="*{empresaSite}" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Bairro</label>
+                                    <input th:field="*{empresaBairro}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Cidade</label>
+                                    <input th:field="*{empresaCidade}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <input th:field="*{empresaEstado}" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <label>Status</label>
+                                <div class="form-group">
+                                    <select class="form-control mb-3" th:field="*{empresaStatus}"
+                                            required="required">
+                                        <option th:value="1" selected>Ativo</option>
+                                        <option th:value="0">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <br/>
+                    <br/>
+                    <div class="form-group-cadastro">
+                        <input type="submit" class="btn btn-cadastro" value="Cadastrar">
+                        <a type="button" class="btn btn-cancelar"
+                           th:href="@{/empresa/listar}" value="Cancelar">Cancelar</a>
+                    </div>
+                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+        <!-- begin footer -->
+        <th:block th:insert="~{/fragments/footer :: footer}"></th:block>
+        <!-- end footer -->
+    </div>
+    <!-- End #page-right-content -->
+
+</div>
+<!-- end .page-contentbar -->
+<!-- End #page-wrapper -->
+<th:block th:insert="~{/fragments/footer-scripts :: scripts}"></th:block>
+<!-- Sweet-Alert  -->
+<script th:src="@{/statics/pages/jquery.sweet-alert.init.js}"></script>
+<script th:src="@{/statics/plugins/sweet-alert2/sweetalert2.min.js}"></script>
+<script>
+    $(function () {
+        $("#btnSubmit").click(function (event) {
+            event.preventDefault();
+            if (
+                $("#empresaRazaoSocial").val() == "" ||
+                $("#empresaCnpj").val() == ""
+            ) {
+                $("#msgInputs").show();
+                $("#msgInputs").fadeOut(8000);
+                return false;
+            } else {
+                swal({
+                    title: 'Tudo ok!',
+                    text: 'Seu cadastro foi efetuado com sucesso!',
+                    type: 'success',
+                    confirmButtonColor: '#08358e',
+                    onClose: submitCadastro
+                })
+            }
+        })
+
+        function submitCadastro() {
+            $("#formCadastro").submit()
+        }
+    })
+</script>
+</body>
+</html>

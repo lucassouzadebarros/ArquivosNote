@@ -1,0 +1,75 @@
+<div th:fragment="sidebar" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<!--left navigation start-->
+    <aside class="sidebar-navigation">
+        <div class="scrollbar-wrapper">
+            <div>
+                <button type="button" class="button-menu-mobile btn-mobile-view visible-xs visible-sm">
+                    <i class="mdi mdi-close"></i>
+                </button>
+
+                <!-- Left Menu Start -->
+                <ul class="metisMenu nav" id="side-menu">
+                    <li><a th:href="@{/inicio}"><i class="ti-paint-bucket"></i>Inicio</a></li>
+                    <!--<span sec:authorize="hasRole('USER')">-->
+                    <li>
+                        <a href="javascript: void(0);" aria-expanded="true"><i class="ti-pencil-alt"></i>Você no Senac<span class="fa arrow"></span></a>
+                        <ul class="nav-second-level nav" aria-expanded="true">
+                            <li><a href="forms-general.html">Cadastro</a></li>
+                            <li><a th:href="@{/curriculo/cadastrar}">Curriculo</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);"><i class="fas fa-store"></i><span> Stands </span><span class="fa arrow"></a>
+                        <ul class="nav-second-level nav" aria-expanded="false">
+                            <li><a th:href="@{/stand/listar}">Listar Stands</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a th:href="@{/empresa/listar}"><i class="ti-spray"></i>Empresas Participantes</a>
+                    </li>
+                    <!--</span>-->
+                    <li>
+                        <a href="javascript: void(0);" aria-expanded="true"><i class="ti-light-bulb"></i>Central de Vagas<span class="fa arrow"></span></a>
+                        <ul class="nav-second-level nav" aria-expanded="true">
+                            <li><a th:href="@{/vaga/vagas}">Listar Vagas</a></li>
+                            <li><a th:href="@{/candidatura/listar}">Minhas Candidaturas</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="javascript: void(0);" aria-expanded="true"><i class="ti-menu-alt"></i>Eventos<span class="fa arrow"></span></a>
+                        <ul class="nav-second-level nav" aria-expanded="true">
+                            <li><a th:href="@{/evento/listar}">Listar Eventos</a></li>
+                            <li><a th:href="@{/eventoUsuario/cadastrar}">Inscrição em Eventos</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" aria-expanded="true"><i class="ti-menu-alt"></i>Ferramentas Administrativas<span class="fa arrow"></span></a>
+                        <ul class="nav-second-level nav" aria-expanded="true">
+                            <li><a th:href="@{/usuario/usuarios}">Usuários</a></li>
+                            <li><a th:href="@{/stand/listar}">Stands</a></li>
+                            <li><a th:href="@{/vaga/vagas}">Vagas</a></li>
+                            <li><a th:href="@{/evento/listar}">Eventos</a></li>
+                            <li><a th:href="@{/empresa/listar}">Empresas</a> </li>
+                            <li><a th:href="@{/responsavel/listar}">Responsável Empresa</a></li>
+                            <li><a th:href="@{/curriculo}">Curriculos Usuários</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" aria-expanded="true"><i class="ti-menu-alt"></i>Relatórios<span class="fa arrow"></span></a>
+                        <ul class="nav-second-level nav" aria-expanded="true">
+                            <li><a th:href="@{/acessoUsuario/standsVisitadosPorUsuario}">Visita stand por usuário</a></li>
+                            <li><a th:href="@{/acessoUsuario/usuariosPorDiaNoStand}">Usuários no stand por dia</a></li>
+                            <li><a th:href="@{/evento/relatorios}">Relatórios de Eventos</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div><!--Scrollbar wrapper-->
+    </aside>
+    <!--left navigation end-->
+</div>

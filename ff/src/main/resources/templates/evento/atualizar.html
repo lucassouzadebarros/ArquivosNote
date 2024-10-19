@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+
+<body>
+<div id="page-wrapper">
+    <!-- Top Bar Start -->
+    <th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+    <!-- Top Bar End -->
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+        <!--left navigation start-->
+        <th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+        <!--left navigation end-->
+
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="m-b-20 header-title">Atualizar Evento</h4>
+
+                         <form class="form-horizontal" role="form" th:object="${eventoDomain}" th:action="@{/evento/atualizar}" method="POST">
+                             <input type="hidden" class="form-control" th:field="*{id}" readonly>
+                             <fieldset>
+                                 <legend>Informações do Evento</legend>
+
+                                 <div class="form-row">
+                                     <div class="col-md-7 mb-3">
+                                         </br><label>Titulo do Evento</label>
+                                         <input type="text" th:field="*{eventoTitulo}" class="form-control" value="Digite o título do evento">
+                                     </div>
+
+                                     <div class="col-md-3 mb-3">
+                                         </br><label>Tipo do Evento</label>
+                                         <select th:field="*{eventoTipo}" id="eventoTipo" class="form-control select2-selection select2-selection--single" required>
+                                             <option value="" hidden>Selecionar</option>
+                                             <option th:each="eventoTipoDomain: ${eventoTipoDomainList}" th:value="${eventoTipoDomain.id}" th:text="${eventoTipoDomain.eventoTipoDescricao}"/>
+                                         </select>
+                                     </div>
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="col-md-4 mb-3">
+                                         <label>Data Inicio</label>
+                                         
+                                         <input type="datetime-local" class="form-control input-group date" id="eventoDataInicio" th:field="*{eventoDataInicio}" />
+                                         <!--<input type="hidden" id="eventoDataFim" th:field="*{eventoDataFim}" />  -->
+                                     </div>
+                                     
+                                      <div class="col-md-4 mb-3">
+                                         <label>Data Fim</label>
+                                         
+                                         <input type="datetime-local" class="form-control input-group date" id="eventoDataFim" th:field="*{eventoDataFim}" />
+                                         <!--<input type="hidden" id="eventoDataFim" th:field="*{eventoDataFim}" />  -->
+                                     </div>
+                                     
+                                    
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="col-md-7 mb-3">
+                                         <label>Selecione o Stand</label>
+                                         <select th:field="*{stand}" id="stand" class="form-control select" required>
+                                             <option value="" hidden>Selecionar</option>
+                                             <option th:each="standDomain: ${standDomainList}" th:value="${standDomain.standId}" th:text="${standDomain.standNome}" />
+                                         </select>
+                                     </div>
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="col-md-3 mb-3">
+                                         <label>Quantidade de Vagas:</label>
+                                         <input type="number" id="qtdVagas" th:field="*{eventoVagas}" min="1"
+                                                class="form-control" placeholder="Digite a quantidade de vagas" required>
+                                     </div>
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="col-md-5 mb-3">
+                                         <label>Link do Evento:</label>
+                                         <input type="url" th:field="*{eventoLink}" id="eventoLink" class="form-control" placeholder="Digite o link do evento - Ex.: https://www.link.com.br">
+                                     </div>
+                                     <div class="col-md-5 mb-3">
+                                         <label>Link do Banner:</label>
+                                         <input type="url" th:field="*{eventoLinkBanner}" id="eventoLinkBanner" class="form-control" placeholder="Digite o link do banner - Ex.: https://www.link.com.br">
+                                     </div>
+                                 </div>
+                                 <div class="form-row">
+                                     <div class="col-md-3 mb-3">
+                                        <label>Status do Evento</label>
+                                        <select th:field="*{eventoStatus}" id="eventoStatus" class="form-control select" required>
+                                            <option value="" selected hidden>Selecionar</option>
+                                            <option value="1">Ativo</option>
+                                            <option value="0">Inativo</option>
+                                        </select>
+                                    </div>
+                                 </div>
+                             </fieldset>
+                             <br/><br/>
+                             <div class="form-group">
+                                 <input type="submit" class="btn btn-cadastro" value="Atualizar">
+                                 <a th:href="@{/evento/listar}" class="btn btn-cancelar>Cancelar</a>
+                             </div>
+                         </form>
+
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+                <br/><br/>
+                <th:block th:insert="fragments/footer.html :: footer"></th:block>
+            </div>
+            <!-- end footer -->
+        </div>
+        <!-- End #page-right-content -->
+    </div>
+    <!-- end .page-contentbar -->
+</div>
+<!-- End #page-wrapper -->
+<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+</body>
+</html>

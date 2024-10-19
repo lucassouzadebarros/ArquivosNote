@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:insert="~{/fragments/head :: head}"></th:block>
+    <!-- Sweet-Alert  -->
+    <link th:href="@{/statics/plugins/sweet-alert2/sweetalert2.min.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="page-wrapper">
+
+    <!-- Top Bar Start -->
+    <th:block th:insert="~{/fragments/topbar :: topbar}"></th:block>
+    <!-- Top Bar End -->
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+        <!--left navigation start-->
+        <th:block th:insert="~{/fragments/sidebar :: sidebar}"></th:block>
+        <!--left navigation end-->
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="m-b-20 header-title">Atualizar Candidatura</h4>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display: none;"
+                     id="msgInputs">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Preencha todos os campos marcados com *</strong>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-20 m-b-20">
+                            <form id="formEdicao" class="form-validation" th:object="${candidatura}"
+                                  th:action="@{/candidatura/editar}" method="POST">
+                                <input th:field="*{id}" type="hidden" />
+                                <div class="form-group">
+                                    <label>Usuario<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="empresaNome" th:field="*{usuario}" required>
+                                        <option value="">Selecione o usuario</option>
+                                        <option th:each="usuario:${usuarios}" th:value="${usuario.Id}"
+                                                th:text="${usuario.nomeCompleto}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vaga<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="vagaCargo" th:field=" *{vaga}" required>
+                                        <option value="">Selecione a vaga</option>
+                                        <option th:each="vaga:${vagas}" th:value="${vaga.id}" th:text="${vaga.cargo}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Curriculo<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="curriculoNome" th:field=" *{curriculo}"
+                                            required>
+                                        <option value="">Selecione o curriculo</option>
+                                        <option th:each="curriculo:${curriculos}" th:value="${curriculo.id}"
+                                                th:text="${curriculo.nome}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Etapa Processo<span class="text-danger">*</span></label>
+                                    <select class="form-control" id="etapaProcessoDesc" th:field="*{etapaProcesso}"
+                                            required>
+                                        <option value="">Selecione a Etapa do Processo</option>
+                                        <option th:each="etapaprocesso:${etapasprocessos}"
+                                                th:value="${etapaprocesso.etapaProcessoId}"
+                                                th:text="${etapaprocesso.etapaProcessoDescricao}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group text-right m-b-0">
+                                    <button type="submit" id="btnSubmit"
+                                            class="btn btn-cadastro">
+                                        Atualizar
+                                    </button>
+                                    <a th:href="@{/candidatura/listar}"
+                                       class="btn btn-cancelar>Cancelar
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+        <!-- begin footer -->
+        <th:block th:insert="~{/fragments/footer :: footer}"></th:block>
+        <!-- end footer -->
+    </div>
+    <!-- End #page-right-content -->
+
+</div>
+<!-- end .page-contentbar -->
+<!-- End #page-wrapper -->
+<th:block th:insert="~{/fragments/footer-scripts :: scripts}"></th:block>
+<!-- Sweet-Alert  -->
+<script th:src="@{/statics/pages/jquery.sweet-alert.init.js}"></script>
+<script th:src="@{/statics/plugins/sweet-alert2/sweetalert2.min.js}"></script>
+<script>
+    $(function () {
+        $("#btnSubmit").click(function (event) {
+            event.preventDefault();
+            if (
+                $("#empresaNome").val() == "" ||
+                $("#vagaCargo").val() == "" ||
+                $("#curriculoNome").val() == "" ||
+                $("#etapaProcessoDesc").val() == ""
+            ) {
+                $("#msgInputs").show();
+                $("#msgInputs").fadeOut(8000);
+                return false;
+            } else {
+                swal({
+                    title: 'Tudo ok!',
+                    text: 'Seu cadastro foi efetuado com sucesso!',
+                    type: 'success',
+                    confirmButtonColor: '#08358e',
+                    onClose: submitCadastro
+                })
+            }
+        })
+
+        function submitCadastro() {
+            $("#formEdicao").submit()
+        }
+    })
+</script>
+</body>
+
+</html>

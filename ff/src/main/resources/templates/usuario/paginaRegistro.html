@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http:www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<title>Feira Virtual - Senac RJ</title>
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<link type="text/css" rel="shortcut icon"
+		  href="../statics/images/favicon.ico">
+
+	<!-- Bootstrap core CSS -->
+	<link type="text/css" href="../statics/css/bootstrap.min.css"
+		  rel="stylesheet">
+	<!-- MetisMenu CSS -->
+	<link type="text/css" href="../statics/css/metisMenu.min.css"
+		  rel="stylesheet">
+	<!-- Icons CSS -->
+	<link type="text/css" href="../statics/css/icons.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link type="text/css" href="../statics/css/style.css" rel="stylesheet">
+	<style type="text/css">
+.centered {
+	margin: 0 auto !important;
+	float: none !important;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HOME -->
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<div class="wrapper-page">
+
+					<div class="m-t-40 card-box">
+						<div class="text-center">
+							<h2 class="text-uppercase m-t-0 m-b-30">
+								<a href="index.html" class="text-success"> <span> <img
+										src="../statics/images/logoazul.png" alt="" height="30">
+									</span>
+								</a>
+							</h2>
+						</div>
+						<div class="account-content">
+							<form class="form-horizontal" th:object="${usuario}"
+								  th:action="@{/usuario/salvaUsuario}" method="POST">
+								<div class="form-group col-sm-12">
+									<div class="form-group col-sm-8 centered">
+										<label for="nomeCompleto">Nome Completo</label> <input
+											class="form-control" type="text" th:field="*{nomeCompleto}"
+											id="nomeCompleto" placeholder="Digite seu nome"
+											required="required" maxlength="250">
+									</div>
+
+									<div class="form-group col-sm-8 centered">
+										<label for="cpf">CPF</label> <input class="form-control"
+																			type="number" th:field="*{cpf}" id="cpf"
+																			placeholder="xxxxxxxxxxx" maxlength="11" required="required">
+
+									</div>
+
+									<div class="form-group col-sm-8 centered">
+										<label for="telefone">Telefone</label> <input
+											class="form-control" type="text" th:field="*{telefone}"
+											id="telefone" placeholder="(xx) xxxxx-xxxx"
+											required="required" maxlength="10">
+									</div>
+
+									<div class="form-group col-sm-8 centered">
+										<label for="email">Email</label> <input class="form-control"
+																				type="email" th:field="*{email}" id="email"
+																				placeholder="john@deo.com" required="required">
+									</div>
+
+									<div class="form-group col-sm-8 centered">
+										<label for="senha">Senha</label> <input class="form-control"
+																				type="password" th:field="*{senha}" required="required"
+																				id="senha" placeholder="Entre sua senha" maxlength="20">
+									</div>
+
+									<div class="form-group col-xs-8 centered">
+										<div class="checkbox checkbox-primary">
+											<input type="checkbox" required="required"
+												   name="usuarioPoliticaLgpdStatus" th:checked="*{status}">
+											<label for="checkboxPolitica"> Eu aceito <a href="#"
+																						th:onclick="'javascript:politicaLgpd();'">Termos e
+												Condições</a>
+												<div hidden="">
+													<select th:field="*{politicaLgpd}">
+														<option th:each="politica : ${politicas}"
+																th:if="${politica.status == 2}"
+																th:value="${politica.id}" selected="selected"></option>
+													</select>
+												</div>
+											</label>
+										</div>
+										<div hidden="">
+											<select th:field="*{roles}">
+												<option th:each="role : ${roles}"
+														th:if="${role.nomeRole.equals('ROLE_USER')}"
+														th:value="${role.nomeRole}" th:text="${role.nomeRole}"
+														selected="selected"></option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group account-btn text-center m-t-10">
+										<div class="col-xs-8 centered">
+											<button class="btn btn-lg btn-primary btn-block"
+													type="submit">Cadastrar</button>
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<div class="clearfix"></div>
+
+						</div>
+					</div>
+					<!-- end card-box-->
+
+
+					<div class="row m-t-50">
+						<div class="col-sm-12 text-center">
+							<p class="text-muted">
+								Já tem cadastro? <a th:href="@{/login}" class="text-dark m-l-5">Faça
+								login</a>
+							</p>
+						</div>
+					</div>
+
+				</div>
+				<!-- end wrapper -->
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- END HOME -->
+
+<div th:fragment="abrePolitica" id="abrePoliticaModalHolder"></div>
+
+<!-- js placed at the end of the document so the pages load faster -->
+
+<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--  <script type="text/javascript" src="/assets/js/jquery-2.1.4.min.js"></script>-->
+<script type="text/javascript" src="../statics/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../statics/js/metisMenu.min.js"></script>
+<script type="text/javascript"
+		src="../statics/js/jquery.slimscroll.min.js"></script>
+
+<!-- App Js -->
+<script type="text/javascript" src="../statics/js/jquery.app.js"></script>
+<script type="text/javascript" src="../statics/js/javascript.js"></script>
+
+<script>
+		function politicaLgpd() {
+			$.ajax({
+				url : "/usuario/politicaLgpd/",
+				success : function(data) {
+					$("#abrePoliticaModalHolder").html(data);
+					$('#abrePoliticaModal').modal({
+						backdrop : 'static',
+						keyboard : false
+					});
+				}
+			});
+		}
+	</script>
+
+
+</body>
+</html>

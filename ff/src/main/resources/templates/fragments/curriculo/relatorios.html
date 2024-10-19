@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www/thymeleaf.org">
+
+<th:block th:insert="/../fragments/head.html :: head"></th:block>
+
+<body>
+
+
+<!-- Personal-Information -->
+<div id="fragmentRelatorios">
+    <div class="button-list text-center">
+        <button class="col-sm-12 col-md-2 col-lg-2 col-xl-2 btn btn-primary waves-effect waves-light" id="abrirModalEscolaridade">Escolaridade</button>
+        <button class="col-sm-12 col-md-2 col-lg-2 col-xl-2 btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal-deficiente" id="abrirModalDeficiencia">Deficiência</button>
+        <button class="col-sm-12 col-md-2 col-lg-2 col-xl-2 btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#con-close-modal-idade" id="abrirModalIdade">Idade</button>
+        <button class="col-sm-12 col-md-2 col-lg-2 col-xl-2 btn btn-primary waves-effect waves-light" id="abrirModalRegiao">Região</button>
+    </div>
+    <!-- Modal Escolaridade -->
+    <div id="con-close-modal-escolaridade" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Relatório Escolaridade</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <!-- <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="field-1" class="control-label">Data Início</label>
+                                                            <input type="date" class="form-control" id="field-1" placeholder="John">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="field-2" class="control-label">Data Fim</label>
+                                                            <input type="date" class="form-control" id="field-2" placeholder="Doe">
+                                                        </div>
+                                                    </div> -->
+                        <div class="col-md-4">
+                            <div class="form-group" id="escolaridade">
+                                <label for="field-3" class="control-label">Escolaridade</label><br>
+                                <select class="selectpicker" multiple data-live-search="true">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group" id="consirarOutros">
+                                <label for="field-3" class="control-label">Considerar
+                                    Outros?</label><br>
+                                <div class="radio radio-success radio-inline">
+                                    <input type="radio" id="inlineRadio1" value="S" name="radioInline"> <label for="inlineRadio1">
+                                    Sim </label>
+                                </div>
+                                <div class="radio radio-danger radio-inline">
+                                    <input type="radio" id="inlineRadio2" value="N" name="radioInline" checked> <label for="inlineRadio2"> Não </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <button id="buscar-escolaridade" type="button" class="btn btn-primary btn-rounded" style="margin-top: 12%; margin-left: 22%;">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <figure class="highcharts-figure">
+                                    <div id="container-relatorio-escolaridade"></div>
+                                    <!-- <div class="progress" style="margin-top: 5px;">
+                                                                    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%; display: none;">
+                                                                        <span class="sr-only"></span>
+                                                                    </div>
+                                                                </div> -->
+                                    <p class="highcharts-description"></p>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal Deficiência -->
+    <div id="con-close-modal-deficiente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Relatório Deficientes</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="field-1" class="control-label">Data
+                                    Início</label> <input type="date" class="form-control" id="field-1" placeholder="John">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="field-2" class="control-label">Data
+                                    Fim</label> <input type="date" class="form-control" id="field-2" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="field-3" class="control-label">Tipo de Deficiência</label><br> <select class="selectpicker" multiple data-live-search="true">
+                                <option>Visual</option>
+                                <option>Auditiva</option>
+                                <option>Mental</option>
+                                <option>Física</option>
+                                <option>Multipla</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <button id="buscar-deficiencia" type="button" class="btn btn-primary btn-rounded" style="margin-top: 12%; margin-left: 30%;">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <figure class="highcharts-figure">
+                                    <div id="container-relatorio-deficiencia"></div>
+                                    <p class="highcharts-description"></p>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal Idade -->
+    <div id="con-close-modal-idade" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Relatório Idade</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Área
+                                de Atuação</label><br> <select class="selectpicker" multiple data-live-search="true">
+                            <option>Desenvolvimento</option>
+                            <option>Suporte</option>
+                            <option>Web Designer</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12">
+                        <div class="form-group">
+                            <label for="field-3" class="control-label">Faixa
+                                Etária</label><br> <select class="selectpicker" multiple data-live-search="true">
+                            <option>14 anos à 24 anos</option>
+                            <option>36 anos à 50 anos</option>
+                            <option>51 ++</option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <button id="buscar-idade" type="button" class="btn btn-primary btn-rounded" style="margin-top: 12%; margin-left: 30%;">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group no-margin">
+                            <figure class="highcharts-figure">
+                                <div id="container-relatorio-idade"></div>
+                                <!-- <div class="progress" style="margin-top: 5px;">
+                                                                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%; display: none;">
+                                                                    <span class="sr-only"></span>
+                                                                </div>
+                                                            </div> -->
+                                <p class="highcharts-description"></p>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+
+    <!-- Modal Região -->
+    <div id="con-close-modal-regiao" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Relatório de Região</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="field-3" class="control-label">Estado</label><br>
+                                <select class="selectpicker" data-live-search="true" id="select-estado"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="field-3" class="control-label">Cidade</label><br>
+                                <select class="selectpicker" data-live-search="true" id="select-cidade"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="field-3" class="control-label">Bairro</label><br>
+                                <select class="selectpicker" multiple data-live-search="true" id="select-bairro"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <button id="buscar-regiao" type="button" class="btn btn-primary btn-rounded" style="margin-top: 12%; margin-left: 30%;">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group no-margin">
+                                <figure class="highcharts-figure">
+                                    <div id="container-relatorio-regiao"></div>
+                                    <!-- <div class="progress" style="margin-top: 5px;">
+                                                                    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 60%; display: none;">
+                                                                        <span class="sr-only"></span>
+                                                                    </div>
+                                                                </div> -->
+                                    <p class="highcharts-description"></p>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+</div>
+
+
+
+
+</body>

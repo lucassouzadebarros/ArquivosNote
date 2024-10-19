@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/inputStyle.css">
+     -->
+    <link href="css/inputStyle.css" rel="stylesheet" />
+    <link href="css/form-line.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/menu.css" rel="stylesheet" />
+
+    <title>SENAC - Cadastro de currículos</title>
+</head>
+
+<body>
+
+
+    <header id="menu-topo" class="d-flex justify-content-between align-items-center">
+        <div class="header-left">
+
+            <a href="#">
+                <div id="logo">
+                    <img src="img/logo-senac.png" id="logoaqui" />
+                </div>
+            </a>
+
+        </div>
+        <div class="header-rigth">
+            <a href="#" class="mr-3 text-light text-shadow">Ajuda</a>
+            <div class="icon-perfil mr-3">
+                JP
+            </div>
+
+            <!-- MENU HAMBURGUER -->
+            <div class="icon-hamburger ml-3 d-none"></div>
+            <div id="hamburger" class="d-none">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+
+        </div>
+    </header>
+
+
+    <nav class="menu-lateral">
+        <button>
+            <img src="icons/stands.svg">
+            <p>Stands</p>
+        </button>
+        <button>
+            <img src="icons/empresa.svg">
+            <p>Empresas</p>
+        </button>
+        <button>
+            <img src="icons/evento.svg">
+            <p>Eventos</p>
+        </button>
+        <button>
+            <img src="icons/vagas.svg">
+            <p>Vagas</p>
+        </button>
+        <button>
+            <img src="icons/curriculo.svg">
+            <p>Curriculo</p>
+        </button>
+    </nav>
+
+
+    <div id="menu-mobile" class="d-none">
+        <div id="bg-menu-mobile">
+        </div>
+
+        <ul id="menu-mobile-ul">
+            <li>
+                <img src="icons/stands.svg">
+                <p class="">Stands</p>
+            </li>
+            <li>
+                <img src="icons/empresa.svg">
+                <p>Empresas</p>
+            </li>
+            <li>
+                <img src="icons/evento.svg">
+                <p>Eventos</p>
+            </li>
+            <li>
+                <img src="icons/vagas.svg">
+                <p>Vagas</p>
+            </li>
+            <li>
+                <img src="icons/curriculo.svg">
+                <p>Curriculo</p>
+            </li>
+            <li>
+                
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    <div id="view">
+        <div class="fomulario">
+            <div class="row">
+                <div class="form-header col-12 mb-3">
+                    <h2>Currículo</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-body col-xs-12 col-md-10 col-sm-12">
+
+                    <form class="form-horizontal p-3" th:object="${curriculo}" th:action="@{/curriculo/salvar}"
+                        method="POST">
+
+                        <div class="form-group identificador-form">
+                            <h3 class="mb-5">Titulo do currículo</h3>
+
+                            <fieldset>
+                                <div class="group">
+                                    <input autofocus="autofocus" type="text" required th:field="*{nome}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Ex: Curriculo para web-desing</label>
+                                </div>
+                            </fieldset>
+
+                        </div>
+
+
+
+                        <div class="form-group identificador-form none">
+                            <div class="row px-3">
+                                <h3 class="mb-5">Dados Pessoais</h3>
+
+                                <div class="group col-12">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{dadoPessoal.nomeCompleto}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Nome completo</label>
+                                </div>
+
+                                <div class="group col-6 col-sm-12">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{dadoPessoal.nomeCompleto}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Data de Nascimento</label>
+                                </div>
+
+                                <div class="group col-md-6 col-sm-12">
+                                    <select th:field="*{formacaoAcademica[0].nivelInstrucao.descricao}">
+
+                                        <option th:value="NAO">NAO</option>
+                                        <option th:value="SIM">SIM</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Possui Deficiência</label>
+                                </div>
+
+                                <div class="group col-md-6 col-sm-12">
+                                    <select th:field="*{formacaoAcademica[0].nivelInstrucao.descricao}">
+                                        <option th:value="SOLTEIRO">Solteiro</option>
+                                        <option th:value="CASADO">Casado</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Estado Civil</label>
+                                </div>
+
+                                <div class="group col-md-6 col-sm-12">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{dadoPessoal.nomeCompleto}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Número de dependentes</label>
+                                </div>
+
+                                <div class="group col-md-6 col-sm-12">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{dadoPessoal.nomeCompleto}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Celular</label>
+                                </div>
+
+                                <div class="group col-12">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Email</label>
+                                </div>
+
+                                <div class="group col-3">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{dadoPessoal.nomeCompleto}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>CEP</label>
+                                </div>
+
+                                <div class="group col-7">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Endereço</label>
+                                </div>
+
+                                <div class="group col-2">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Número</label>
+                                </div>
+
+                                <div class="group col-4">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Bairro</label>
+                                </div>
+
+                                <div class="group col-4">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Cidade</label>
+                                </div>
+
+                                <div class="group col-4">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Estado</label>
+                                </div>
+
+                                <div class="group col-12">
+                                    <input autofocus="autofocus" type="text" required th:field="*{dadoPessoal.email}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Complemento</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group identificador-form none">
+
+
+                            <div class="row px-3">
+                                <h3 class="mb-5">Formação Acadêmica</h3>
+                                <div class="group col-12">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{formacaoAcademica[0].instituicao}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Instituição</label>
+                                </div>
+
+                                <div class="group col-12">
+                                    <input autofocus="autofocus" type="text" required
+                                        th:field="*{formacaoAcademica[0].curso}">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Curso</label>
+                                </div>
+
+                                <div class="group col-md-6 col-sm-12">
+                                    <select th:field="*{formacaoAcademica[0].status}">
+                                        <option th:value="FORMADO">FORMADO</option>
+                                        <option th:value="EM_FORMACAO">EM FORMAÇÃO</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Status</label>
+                                </div>
+
+                                <div class="group col-md-6 col-sm-12">
+                                    <select th:field="*{formacaoAcademica[0].nivelInstrucao.descricao}">
+                                        <option th:value="TECNOLOGO">TECNÓLOGO</option>
+                                        <option th:value="TECNICO">TÉCNICO</option>
+                                    </select>
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Tipo de formação</label>
+                                </div>
+                            </div>
+
+                            <h3 class="mb-5">Experiência Profissional</h3>
+
+                            <div class="group">
+                                <input autofocus="autofocus" type="text" required
+                                    th:field="*{formacaoAcademica[0].instituicao}">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Instituição</label>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                    </form>
+
+                </div>
+
+                <div class="col-2 d-none d-md-block">
+                    <div class="form-statusline">
+                        <ul>
+                            <li class="lineActive lineCorrecao">1</li>
+                            <li>2</li>
+                            <li>3</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-footer form-footer-fixed d-flex justify-content-between mt-3 col-12">
+
+                <button th:href="@{/curriculo}" class="btn-projeto btn-vermelho">CANCELAR</button>
+
+                <div class="rpb">
+                    <button name="anterior" class="btn-projeto btn-amarelo"><img src="icons/de-volta.svg"
+                            height="20px"></button>
+                    <button name="proximo" class="btn-projeto btn-amarelo"><img src="icons/proximo.svg"
+                            width="20px"></button>
+                </div>
+
+                <div class="d-none d-sm-block">
+                    <button name="anterior" class="btn-projeto btn-amarelo">VOLTAR</button>
+                    <button name="proximo" class="btn-projeto btn-amarelo">SEGUIR</button>
+                </div>
+                <button type="submit" class="btn-projeto btn-verde">SALVAR</button>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <footer>
+        <p class="text-light text-shadow">© Copyright Senac RJ 2020 Todos os direitos reservados</p>
+    </footer>
+
+    
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+    <script src="js/script.js"></script>
+    <script src="js/menu.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+</html>

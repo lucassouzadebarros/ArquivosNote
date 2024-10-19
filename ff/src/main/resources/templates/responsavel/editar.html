@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+
+<body>
+<div id="page-wrapper">
+    <!-- Top Bar Start -->
+    <th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+    <!-- Top Bar End -->
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+        <!--left navigation start-->
+        <th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+        <!--left navigation end-->
+
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="m-b-20 header-title">Alterar Responsável</h4>
+
+                        <form class="form-horizontal" role="form" th:object="${responsavel}" th:action="@{/responsavel/alterar}" method="POST">
+                            <input type="hidden" th:field="*{responsavelId}">
+                            <fieldset>
+                                <legend>Informações sobre Responsável</legend>
+                                <div class="form-row">
+                                    <div class="col-md-8 mb-3">
+                                        <label>Usuário:</label>
+                                        <select th:field="*{usuario}" class="form-control">
+                                            <option value="">Selecione o usuário</option>
+                                            <option th:each="usuario : ${usuarios}"
+                                                    th:value="${usuario.Id}"
+                                                    th:text="${usuario.nomeCompleto}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 mb-3">
+                                    <label>Empresa:</label>
+                                    <select th:field="*{empresa}" class="form-control">
+                                        <option value="">Selecione a empresa</option>
+                                        <option th:each="empresa : ${empresas}"
+                                                th:value="${empresa.empresaId}"
+                                                th:text="${empresa.empresaNome}">
+                                        </option>
+                                    </select>
+                                    <br/>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-8 mb-3">
+                                        <label>Status:</label>
+
+                                        <select th:field="*{responsavelStatus}" class="form-control">
+                                            <option th:value="1" selected>Ativo</option>
+                                            <option th:value="0" >Inativo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Contatos</legend>
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Telefone:</label>
+                                        <input th:field="*{responsavelTelefone}" type="text" class="form-control" value="Telefone">
+                                    </div>
+                                    <div class="col-md-5 mb-5">
+                                        <label>Email:</label>
+                                        <input th:field="*{responsavelEmail}" type="email" class="form-control" placeholder="Email"></br>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <br/><br/>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-cadastro" value="Atualizar">
+                                <a type="button" class="btn btn-cancelar"
+                                   th:href="@{/responsavel/listar}" value="Cancelar">Cancelar</a>
+                            </div>
+                        </form>
+
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+                <br/><br/>
+                <th:block th:insert="fragments/footer.html :: footer"></th:block>
+            </div>
+
+
+            <!-- end footer -->
+        </div>
+        <!-- End #page-right-content -->
+    </div>
+    <!-- end .page-contentbar -->
+</div>
+<!-- End #page-wrapper -->
+
+<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+
+
+</body>
+</html>

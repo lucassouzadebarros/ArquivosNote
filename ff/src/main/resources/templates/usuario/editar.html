@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/statics/stands/css/style.css}" />
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    />
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body class="fadeInLeft">
+<div class="imagemCentral">
+    <div class="estrutura">
+        <div class="header">
+            <a href="#" class="logo"
+            ><img class=" mb-3 img-responsive " th:src="@{/statics/stands/img/senac-logo.png}" alt="logo
+            senac" style="margin-left: 60px;">
+            </a>
+            <nav>
+                <ul>
+                    <li>
+                        <a
+                        ><i class="fa fa-question mx-2" aria-hidden="true"></i
+                        >Ajuda</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <nav class="sidenav container-fluid mt-0">
+            <p class="wrap text-white display-5 text-center">
+                Painel Feira Virtual
+            </p>
+            <ul class="atributos">
+                <li>
+                    <a th:href="@{/stand/listarStands}" class="ajustaLayout">
+                        <i class="fas fa-list"></i>
+                        Stands
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/responsavel/listarResponsavel}">
+                        <i class="far fa-user"></i>
+                        Responsável
+                    </a>
+                </li>
+                <li>
+                    <a
+                    ><i class="far fa-building"></i>
+
+                        Empresa</a>
+                </li>
+                <li>
+                    <a><i class="far fa-calendar-alt"></i>Eventos</a>
+                </li>
+                <li>
+                    <a><i class="fas fa-clipboard-list"></i>Vagas</a>
+                </li>
+            </ul>
+        </nav>
+        <main class="content">
+            <form th:object="${usuario}" th:action="@{/usuario/alterar}" method="POST">
+                <input th:field="*{Id}" type="hidden"/>
+                <div class="row ml-5 mt-5 mr-5 mx-5">
+                    <div class="card col-md-9 mt-5 container mt-5">
+                        <h3 class="text-primary ml-3">Usuario</h3>
+                        <div class="card-body">
+                            <div class="card card-lg">
+                                <div class="row p-4">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>CPF</label>
+                                            <input th:field="*{cpf}" class="form-control" placeholder="CPF" autofocus/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Nome Completo</label>
+                                        <div class="form-group">
+                                            <input th:field="*{nomeCompleto}" class="form-control" placeholder="NomeCompleto" autofocus/>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label><div class="text-break">E-mail</div></label>
+                                        <div class="form-group">
+                                            <input type="email" th:field="*{email}" class="form-control"placeholder="E-mail" autofocus/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label><div class="text-break">Telefone</div></label>
+                                        <div class="form-group">
+                                            <input th:field="*{telefone}" class="form-control"placeholder="Telefone" autofocus/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label><div class="text-break">Senha</div></label>
+                                        <div class="form-group">
+                                            <input type="password" th:field="*{senha}" class="form-control"placeholder="Senha" autofocus/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row p-4">
+                                    <div class="col-md-6"  >
+                                        <label>Status</label>
+                                        <div class="form-group">
+                                            <select
+                                                    class="form-control mb-3" th:field="*{status}"
+                                                    required="required">
+                                                <option th:value="1">Ativo</option>
+                                                <option th:value="0" >Inativo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="samePlaceElement text-nowrap  col-md-3 mr-3 mt-3 d-block">
+                                    <button
+                                            class="ajustaButtton btn btn-primary btn-lg btn-rounded mr-5"
+                                            style="margin-left: 360px;"
+                                            type="submit"
+                                    >
+                                        <i class="fas fa-plus"></i> Atualizar Usuario
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </main>
+    </div>
+        <footer class="footer">
+            <div style="color: #FFFFFF">
+                <p>
+
+                    Copyright &copy; All rights reserved | Senac RJ
+                    <i class="icon-heart" aria-hidden="true"></i> by
+                    <a href="https://rj.senac.br/" target="_blank">rj.senac.br</a>
+                </p>
+            </div>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

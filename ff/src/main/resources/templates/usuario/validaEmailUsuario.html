@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+
+<body>
+	<div id="page-wrapper">
+		<!-- Top Bar Start -->
+		<th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+		<!-- Top Bar End -->
+
+		<!-- Page content start -->
+		<div class="page-contentbar">
+			<!--left navigation start-->
+			<th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+			<!--left navigation end-->
+
+			<!-- START PAGE CONTENT -->
+			<div id="page-right-content">
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="m-b-20 header-title">Validação de E-mail</h4>
+
+							<form class="form-horizontal" th:object="${usuario}"
+								th:action="@{/usuario/enviaEmail}" method="GET" style="margin: 10px">
+								<div class="form-group">
+									<fieldset>
+										<div class="form-group col-md-12">
+											<div class="form-row col-md-5 mt-3">
+												<label for="inputCPF">Email</label>
+												<input type="email" id="inputCPF" class="form-control input-sm"
+													th:field="*{email}" autofocus="autofocus"
+													placeholder="Informe seu e-mail" maxlength="50"
+													required="required">
+											</div>
+
+										</div>
+										<div class="form-group col-md-12">
+											<div class="form-row col-md-5 mt-3">
+												<button type="submit" class="btn btn-sm btn-success">Salvar</button>
+												<a th:href="@{/usuario/usuarios}" class="btn btn-sm btn-default">Atualizar</a>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+							</form>
+
+						</div> <!-- end col -->
+					</div> <!-- end row -->
+					<br/><br/>
+					<th:block th:insert="fragments/footer.html :: footer"></th:block>
+				</div>
+
+
+				<!-- end footer -->
+			</div>
+			<!-- End #page-right-content -->
+		</div>
+		<!-- end .page-contentbar -->
+	</div>
+	<!-- End #page-wrapper -->
+
+	<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+
+</body>
+</html>

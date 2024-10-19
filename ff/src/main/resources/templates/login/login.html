@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www/thymeleaf.org">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+
+<body>
+
+<!-- HOME -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="wrapper-page">
+
+                    <div class="m-t-40 card-box">
+                        <div class="text-center">
+                            <h2 class="text-uppercase m-t-0 m-b-30">
+                                <a href="index.html" class="text-success">
+                                    <span><img src="statics/images/logo.png" alt="" height="30"></span>
+                                </a>
+                            </h2>
+                            <!--<h4 class="text-uppercase font-bold m-b-0">Sign In</h4>-->
+                        </div>
+                        <div class="account-content">
+                            <form class="form-horizontal" th:action="@{/signin}" method="post">
+
+                                <div class="form-group m-b-20">
+                                    <div class="col-xs-12">
+                                        <label>CPF</label>
+                                        <input class="form-control" type="text" id="txtUsername" name="txtUsername" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-b-20">
+                                    <div class="col-xs-12">
+                                        <a href="pages-forget-password.html" class="text-muted pull-right font-14">Esqueceu sua senha?</a>
+                                        <label >Senha</label>
+                                        <input class="form-control" type="password" id="txtPassword" name="txtPassword" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-b-30">
+                                    <div class="col-xs-12">
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="checkbox5" type="checkbox">
+                                            <label for="checkbox5">
+                                                Lembrar
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group account-btn text-center m-t-10">
+                                    <div class="col-xs-12">
+                                        <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                    <!-- end card-box-->
+
+
+                    <div class="row m-t-50">
+                        <div class="col-sm-12 text-center">
+                            <p class="text-muted">Não possui uma conta? <a href="pages-register.html" class="text-dark m-l-5">Cadastre-se!</a></p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end wrapper -->
+
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END HOME -->
+
+<th:block th:insert="fragments/footer-scripts.html :: scripts"/>
+
+</body>
+</html>

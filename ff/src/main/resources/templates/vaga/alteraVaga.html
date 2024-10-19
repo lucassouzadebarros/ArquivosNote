@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+<body>
+<div id="page-wrapper">
+	<!-- Top Bar Start -->
+	<th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+	<!-- Top Bar End -->
+
+	<!-- Page content start -->
+	<div class="page-contentbar">
+		<!--left navigation start-->
+		<th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+		<!--left navigation end-->
+
+		<!-- START PAGE CONTENT -->
+		<div id="page-right-content">
+
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12">
+						<h4 class="m-b-20 header-title">Atualizar Vaga</h4>
+
+						<form class="form-horizontal" th:object="${vaga}" th:action="@{/vaga/salvaAlteraVaga}" method="POST">
+							<input type="hidden" class="form-control" id="id"
+								   th:field="*{id}" autofocus="autofocus" readonly="readonly">
+							<fieldset>
+								<legend>Informações da Vaga</legend>
+								<div class="form-row">
+									<div class=" col-md-12">
+										<span sec:authorize="hasRole('ADMIN')">
+											<div class="form-row col-md-5 mt-3">
+												<label>Empresa</label>
+												<select class="form-control" id="inputEmpA" th:field="*{empresa}" required="required">
+													<option value="">Selecione</option>
+													<option th:each="empresa : ${empresas}"
+															th:value="${empresa.empresaId}" th:text="${empresa.empresaNome}"></option>
+												</select>
+											</div>
+										</span>
+										<span hidden="" sec:authorize="hasRole('ADMINEMP')">
+											<div class="form-row col-md-5 mt-3">
+												<label>Empresa</label>
+												<select class="form-control" id="inputEmp" th:field="*{empresa}">
+													<option th:each="empresa : ${empresaEmp}"
+															th:value="${empresa.empresaId}" th:text="${empresa.empresaNome}"
+															selected="selected"></option>
+												</select>
+											</div>
+										</span>
+									</div>
+									<div class="col-md-12">
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputCar">Cargo</label>
+											<input type="text" id="inputCar" class="form-control"
+												   th:field="*{cargo}" autofocus="autofocus"
+												   placeholder="Informe a cargo" maxlength="50"
+												   required="required">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputDes">Descrição</label>
+											<textarea class="form-control" id="inputDes"
+													  rows="4" th:field="*{descricao}" autofocus="autofocus"
+													  placeholder="Informe a descrição"
+													  required="required"></textarea>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label>Segmento</label>
+											<select class="form-control" id="inputSeg" th:field="*{segmento}" required="required">
+												<option value="">Selecione</option>
+												<option th:each="segmento : ${segmentos}"
+														th:value="${segmento.id}"
+														th:text="${segmento.descricao}"></option>
+											</select>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label for="InputAre">Área Atuação</label>
+											<select class="form-control" id="inputAre"
+													th:field="*{areaAtuacao}" required="required"><option value="">Selecione</option>
+												<option th:each="areaAtuacao : ${areaAtuacoes}"
+														th:value="${areaAtuacao.id}"
+														th:text="${areaAtuacao.descricao}">
+												</option>
+											</select>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputCod">Código Senac</label>
+											<input type="text" id="inputCod" class="form-control"
+												   th:field="*{codigoSenac}" autofocus="autofocus"
+												   placeholder="Informe o código" maxlength="50"
+												   required="required">
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<div class="row">
+												<div class="col-md-5 mb-3">
+													<label for="inputSen">Vaga Senac</label>
+													<select id="inputSen" class="form-control" th:field="*{senac}" required>
+														<option value="0"></option>
+														<option value="1">Vaga exclusiva</option>
+
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputVagT">Vaga Tipo</label>
+											<select class="form-control" id="inputVagT"
+													th:field="*{vagaTipo}" required="required">
+												<option value="">Selecione</option>
+												<option th:each="vagaTipo : ${vagaTipos}"
+														th:value="${vagaTipo.id}"
+														th:text="${vagaTipo.descricao}">
+												</option>
+											</select>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputURL">URL Vaga</label>
+											<input type="text" id="inputURL" class="form-control "
+												   th:field="*{urlVaga}" autofocus="autofocus"
+												   placeholder="Informe o URL" maxlength="50"
+												   required="required">
+										</div>
+
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputQua">Visibilidade Início</label>
+											<input class="form-control" id="inputDataIni"
+												   type="datetime-local" value=""
+												   th:field="*{disponibilidadeInicio}" required="required">
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputQua">Visbilidade Fim</label>
+											<input class="form-control" id="inputOfertaDataFim"
+												   type="datetime-local" value=""
+												   th:field="*{disponibilidadeFim}" required="required">
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label for="inputQua">Quantidade</label>
+											<input type="number" id="inputQua" class="form-control"
+												   th:field="*{quantidade}" autofocus="autofocus"
+												   placeholder="Informe a quantidade" maxlength="3" min="0"
+												   required="required">
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label>Bairro</label>
+											<select class="form-control"
+													id="inputEst" th:field="*{bairro}" required="required">
+												<option value="">Selecione</option>
+												<option th:each="bairro : ${bairros}"
+														th:value="${bairro.id}" th:text="${bairro.nome}">
+												</option>
+											</select>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label>Cidade</label>
+											<select class="form-control" id="inputCidade"
+													th:field="*{cidade}" required="required">
+												<option value="">Selecione</option>
+												<option th:each="cidade : ${cidades}"
+														th:value="${cidade.id}" th:text="${cidade.nome}"></option>
+											</select>
+										</div>
+										<div class="form-row col-md-5 mt-3">
+											<label>Estado</label>
+											<select class="form-control" id="inputEstado"
+													th:field="*{estado}" required="required">
+												<option value="">Selecione</option>
+												<option th:each="estado : ${estados}"
+														th:value="${estado.id}" th:text="${estado.nome}">
+												</option>
+											</select>
+										</div>
+										<div class="form-row col-md-5 mt-3" hidden="">
+											<label>Status</label>
+											<select class="form-control" id="inputSta" th:field="*{status}">
+												<option th:value="0"></option>
+											</select>
+										</div>
+									</div>
+							</fieldset>
+							<br/>
+							<br/>
+							<div class="form-group-cadastro">
+								<input type="submit" class="btn btn-cadastro" value="Atualizar">
+								<a th:href="@{/vaga/vagas}" class="btn btn-cancelar">Cancelar</a>
+							</div>
+						</form>
+
+					</div> <!-- end col -->
+				</div> <!-- end row -->
+				<br/><br/>
+				<th:block th:insert="fragments/footer.html :: footer"></th:block>
+			</div>
+
+			<!-- end footer -->
+		</div>
+		<!-- End #page-right-content -->
+	</div>
+	<!-- end .page-contentbar -->
+</div>
+<!-- End #page-wrapper -->
+
+<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+
+</body>

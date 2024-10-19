@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www/thymeleaf.org">
+<th:block th:insert="/../fragments/head.html :: head"></th:block>
+
+
+<body>
+
+<div id="fragmentLista" style="padding: 20px;">
+
+    <div  th:each="curriculo : ${curriculos}" >
+        <div class="col-md-3">
+            <div class="text-center card-box">
+                <div class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle card-drop"
+                       data-toggle="dropdown" aria-expanded="false">
+                        <h3 class="m-0 text-muted">
+                            <i class="mdi mdi-dots-horizontal"></i>
+                        </h3>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <!--<li><a href="#">Exportar para PDF</a></li>-->
+                        <!--<li><a href="#">Imprimir</a></li>-->
+                        <li><a th:href="@{~/curriculo/excluir/{idCurriculo}(idCurriculo=${curriculo.id})}">Excluir</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <div class="member-card">
+
+                    <div class="thumb-xl member-thumb m-b-10 center-block">
+                        <img src="https://www.colegiodepadua.com.br/img/user.png"
+                             class="img-circle img-thumbnail" alt="profile-image"> <i
+                            class="mdi mdi-information-outline member-star text-success"
+                            title="verified user"></i>
+                    </div>
+
+                    <div class="">
+                        <h4 class="m-b-4" th:text="${curriculo.nome}"></h4>
+
+                        <p class="text-muted" th:text="${curriculo.mini}"></p>
+                        <span> <a href="#" class="text-pink">10 Candidaturas</a>
+						</span>
+                    </div>
+
+
+
+                    <button type="button" class="btn btn-default btn-sm m-t-10">Acessar
+                        Curriculo</button>
+
+
+                    <ul class="social-links list-inline m-t-30">
+                        <li><a title="" data-placement="top" data-toggle="tooltip"
+                               class="tooltips" href="" data-original-title="Facebook"><i
+                                class="fa fa-facebook"></i></a></li>
+                        <li><a title="" data-placement="top" data-toggle="tooltip"
+                               class="tooltips" href="" data-original-title="Twitter"><i
+                                class="fa fa-twitter"></i></a></li>
+                        <li><a title="" data-placement="top" data-toggle="tooltip"
+                               class="tooltips" href="" data-original-title="Skype"><i
+                                class="fa fa-skype"></i></a></li>
+                    </ul>
+
+                    <span class="user-badge bg-warning">05 Visualizações</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

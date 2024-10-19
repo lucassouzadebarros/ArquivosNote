@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www/thymeleaf.org">
+<th:block th:insert="/../fragments/head.html :: head"></th:block>
+
+
+<!-- estilos curriculo -->
+
+<link th:href="@{~/statics/css/bootstrap-select.min.css}" rel="stylesheet">
+<link th:href="@{~/statics/etapa-curriculo/relatorio.css}" rel="stylesheet">
+<link th:href="@{~/statics/plugins/switchery/switchery.min.css}"
+      rel="stylesheet">
+
+
+
+<body>
+
+<div id="page-wrapper">
+
+
+    <th:block th:insert="/../fragments/topbar.html :: topbar" />
+    <!-- Page content start -->
+    <div class="page-contentbar">
+
+        <th:block th:insert="/../fragments/sidebar.html :: sidebar" />
+
+
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="p-0 text-center">
+                            <div class="member-card">
+                                <div class="thumb-xl member-thumb m-b-10 center-block">
+                                    <img src="../statics/images/users/avatar-3.jpg"
+                                         class="img-circle img-thumbnail" alt="profile-image"> <i
+                                        class="mdi mdi-star-circle member-star text-success"
+                                        title="verified user"></i>
+                                </div>
+
+                                <div class="">
+                                    <h4 class="m-b-5">Mark A. McKnight</h4>
+                                    <p class="text-muted">@webdesigner</p>
+                                </div>
+
+                                <p class="text-muted m-t-10">Hi I'm Johnathn Deo,has been
+                                    the industry's standard dummy text ever since the 1500s, when
+                                    an unknown printer took a galley of type.</p>
+                            </div>
+
+                        </div>
+                        <!-- end card-box -->
+
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="m-t-30">
+                    <ul class="nav nav-tabs tabs-bordered">
+                        <li class=""><a href="#profile-perfil" data-toggle="tab"
+                                        aria-expanded="false"> Perfil </a></li>
+
+                        <li class=""><a href="#profile-curriculo" data-toggle="tab"
+                                        aria-expanded="true"> Novo Curriculo </a></li>
+
+                        <li class=""><a href="#profile-listaCurriculo"
+                                        data-toggle="tab" aria-expanded="false"> Lista de Curriculos
+                        </a></li>
+
+                        <li class=""><a href="#profile-relatorios" data-toggle="tab"
+                                        aria-expanded="false"> Relatórios </a></li>
+
+                        <li class="active"><a href="#profile-dadosPessoais"
+                                              data-toggle="tab" aria-expanded="false"> Dados Pessoais </a></li>
+
+                    </ul>
+                    <div class="tab-content">
+
+                        <!-- ABA PERFIL -->
+                        <div class="tab-pane" id="#profile-perfil">
+                            <div class="panel panel-default panel-fill">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Perfil</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!-- PERFIL -->
+                                    <div
+                                            th:replace="/../fragments/curriculo/perfil :: #fragmentPerfil"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ABA CURRICULO -->
+                        <div class="tab-pane" id="profile-curriculo">
+                            <div class="panel panel-default panel-fill">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Novo Currículo</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!-- CURRICULO -->
+                                    <div
+                                            th:replace="/../fragments/curriculo/montarCurriculo :: #fragmentCurriculo"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ABA LISTA -->
+                        <div class="tab-pane" id="profile-listaCurriculo">
+                            <div class="panel panel-default panel-fill">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Lista de Currículos</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div
+                                            th:replace="/../fragments/curriculo/listaCurriculos :: #fragmentLista"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ABA RELATORIOS -->
+                        <div class="tab-pane" id="profile-relatorios">
+                            <div class="panel panel-default panel-fill">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Relatórios</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!-- RELATORIOS
+                                    <div
+                                        th:replace="/../fragments/curriculo/relatorios :: #fragmentRelatorios"></div>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ABA DADOS PESSOAIS  -->
+                        <div class="tab-pane" id="profile-dadosPessoais">
+                            <div class="panel panel-default panel-fill">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Dados Pessoais</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <!-- FORM DADOS PESSOAIS -->
+                                    <div
+                                            th:replace="/../fragments/curriculo/dadoPessoal :: #form-dadoPessoal">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <!-- end container -->
+
+                <div class="footer">
+                    <th:block th:insert="/../fragments/footer.html :: footer" />
+                </div>
+                <!-- end footer -->
+
+            </div>
+            <!-- End #page-right-content -->
+
+        </div>
+        <!-- end .page-contentbar -->
+    </div>
+    <!-- End #page-wrapper -->
+
+    <th:block th:insert="/../fragments/footer-scripts.html :: scripts" />
+</div>
+
+<!-- scripts Curriculo -->
+<script th:src="@{~/statics/js/etapa-curriculo/grafico-pizza.js}"></script>
+<script th:src="@{~/statics/js/etapa-curriculo/usuario-autenticado.js}"></script>
+<script th:src="@{~/statics/plugins/bootstrap-multiselect/bootstrap-select.min.js}"></script>
+</body>
+
+</html>

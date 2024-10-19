@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+
+<body>
+<div id="page-wrapper">
+    <!-- Top Bar Start -->
+    <th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+    <!-- Top Bar End -->
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+        <!--left navigation start-->
+        <th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+        <!--left navigation end-->
+
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="m-b-20 header-title">Cadastrar Stand</h4>
+
+                        <form class="form-horizontal" role="form" th:object="${stand}" th:action="@{/stand/salvar}" method="POST">
+                            <fieldset>
+                                <legend>Informações sobre o Stand</legend>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        </br><label>Nome:</label>
+                                        <input type="text" th:field="*{standNome}" class="form-control" placeholder="Nome do Stand">
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        </br><label>Logo:</label>
+                                        <input type="text" th:field="*{standLinkLogomarca}" class="form-control" placeholder="Imagem.jpg">
+                                    </div>
+
+                                    <div class="col-md-12 mb-3">
+                                        </br><label>Link da apresentação:</label>
+                                        <input type="text" th:field="*{standLinkApresentacao}" class="form-control" placeholder="Link da Apresentação">
+                                    </div>
+
+                                    <div class="col-md-12" style="margin-top: 15px;">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label>Status:</label>
+                                                <select class="form-control" th:field="*{standStatus}" required>
+                                                    <option value="1">Ativo</option>
+                                                    <option value="0">Inativo</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-9 mb-3">
+                                                <label>Link do Chat:</label>
+                                                <input th:field="*{standLinkChat}" type="text" class="form-control" placeholder="Chat">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-3" style="margin-top: 15px;">
+                                    <label>Empresa:</label>
+                                    <select class="form-control" th:field="*{empresa}" required>
+                                        <option value="">Selecione</option>
+                                        <option th:each="empresa : ${empresas}"
+                                                th:value="${empresa.empresaId}"
+                                                th:text="${empresa.empresaNome}"></option>
+                                    </select>
+                                </div>
+
+                            </fieldset>
+                            <br/>
+                            <br/>
+                            <div class="form-group-cadastro">
+                                <input type="submit" class="btn btn-cadastro" value="Cadastrar">
+                                <a th:href="@{/stand/listar}" class="btn btn-cancelar">Cancelar</a>
+                            </div>
+                        </form>
+
+                    </div> <!-- end col -->
+                </div> <!-- end row -->
+                <br/><br/>
+                <th:block th:insert="fragments/footer.html :: footer"></th:block>
+            </div>
+
+
+            <!-- end footer -->
+        </div>
+        <!-- End #page-right-content -->
+    </div>
+    <!-- end .page-contentbar -->
+</div>
+<!-- End #page-wrapper -->
+
+<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+
+</body>
+</html>

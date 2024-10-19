@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Exibir Curriculo</title>
+  </head>
+  <body>
+
+	<div class="container">
+		<div class="panel-heading my-3" align="center">
+			<strong>EXIBIÇÃO CURRICULO</strong>
+		</div>
+		
+		<div class="panel-body">
+			<form class="form-horizontal p-3" th:object="${curriculo}" th:action="@{/curriculo/alterar}"
+			method="POST">
+				<div class="form-group">
+			<fieldset>
+						
+						<h3>Titulo do currículo</h3>
+						
+						<div>
+
+								<label>NOME</label>
+								<p th:text="*{nome}"/>
+							
+						</div>
+						
+						<hr class="row my-3">
+						
+						<h3>Dados Pessoais</h3>
+						<div>
+							
+								<label>NOME COMPLETO</label>
+								<p th:text="*{dadoPessoal.nomeCompleto}"/>
+							
+						
+								<label>EMAIL</label>
+								<p th:text="*{dadoPessoal.email}"/>
+						
+						</div>
+
+						<hr class="row my-3">
+
+						<h3>Formação Acadêmica</h3>
+						<div>
+			
+								<ul th:each="formacaoAcademica : *{formacoesAcademicas}">
+									<li>
+										<hr>
+											<p th:text="${formacaoAcademica.instituicao}"></p>
+											<p th:text="${formacaoAcademica.curso}"></p>
+											<p th:text="${formacaoAcademica.status}"></p>
+											<p th:text="${formacaoAcademica.nivelInstrucao.descricao}"></p>
+										<hr>
+									</li>
+									
+								</ul>
+							
+						</div>
+						
+						<hr class="row my-3">
+
+
+						<h3>Experiências Profissionais</h3>
+						<div>
+						
+						
+							<ul th:each="experienciaProfissional : *{experienciasProfissionais}">
+									<li>
+										<hr>
+											<p th:text="${experienciaProfissional.empresa}"></p>
+											<p th:text="${experienciaProfissional.descricao}"></p>
+										<hr>
+									</li>
+							</ul>
+							
+						</div>	
+						
+						<hr class="row my-3">
+						
+						
+						<h3>Links Externo</h3>
+						<div>
+						
+							<ul th:each="linkExterno : *{linksExternos}">
+									<li>
+										<hr>
+											<p th:text="${linkExterno.descricao}"></p>
+											<p th:text="${linkExterno.valor}"></p>
+										<hr>
+									</li>
+							</ul>
+						</div>
+						
+						 
+						
+						<hr class="row my-3">
+
+						<h3>Informações Adicionais</h3>
+						<div>
+							<ul th:each="informacoesAdicionais : *{informacoesAdicionais}">
+									<li>
+										<hr>
+											<p th:text="${informacoesAdicionais.descricao}"></p>
+											<p th:text="${informacoesAdicionais.valor}"></p>
+										<hr>
+									</li>
+							</ul>
+						</div>
+
+
+						
+
+					</fieldset>
+				</div>
+				<div align="center">
+					<button type="submit" class="btn btn-sm btn-success">SALVAR</button>
+					<a th:href="@{/curriculo/listarCurriculos}" class="btn btn-sm btn-danger">CANCELAR</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

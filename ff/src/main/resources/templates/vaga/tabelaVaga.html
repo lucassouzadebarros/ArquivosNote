@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+	<th:block th:insert="fragments/head.html :: head"></th:block>
+</head>
+
+<body>
+
+<div id="page-wrapper">
+	<!-- Top Bar Start -->
+	<th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+	<!-- Top Bar End -->
+	<!-- Page content start -->
+	<div class="page-contentbar">
+
+		<!--left navigation start-->
+		<th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+		<!--left navigation end-->
+
+		<!-- START PAGE CONTENT -->
+			<div id="page-right-content">
+
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-7">
+								<h4 class="header-title">Lista de Vagas</h4>
+							</div>
+						</div>
+						<div class="col-sm-12">
+						<span sec:authorize="hasRole('ADMIN')">
+							<div class="form-group">
+								<label class="control-label">Opções</label><br>
+								<a type="button" class="btn btn-azul" th:href="@{/vaga/cadastraVaga}">Cadastrar</a>
+								<a type="button" class="btn btn-azul" th:onclick="'javascript:highChartVaga();'"
+								   data-toggle="modal" data-target=".myModal">Relatório de Vagas</a>
+								<a type="button" class="btn btn-azul" th:onclick="'javascript:highChartCandidatura();'"
+								   data-toggle="modal" data-target=".myModal">Candidaturas por Vaga</a>
+							</div>
+						</span>
+						<span sec:authorize="hasRole('ADMINEMP')">
+							<div class="form-group">
+								<label class="control-label">Opções</label><br>
+								<a type="button" class="btn btn-azul" th:href="@{/vaga/cadastraVaga}">Cadastrar</a>
+							</div>
+						</span>
+						</div>
+							<div class="col-lg-12">
+								<div class="m-b-20">
+									<table
+											id="datatable-responsive"
+											class="table table-striped table-bordered dt-responsive nowrap"
+											cellspacing="0"
+											width="100%"
+										>
+										<thead>
+											<tr class="align-middle text-center">
+												<th class="align-middle text-center">Id</th>
+												<span sec:authorize="hasRole('ADMIN')"><th
+													class="align-middle text-center">Empresa</th></span>
+												<th class="align-middle text-center">Código Senac</th>
+												<th class="align-middle text-center">Cargo</th>
+												<th class="align-middle text-center">Visibilidade Início</th>
+												<th class="align-middle text-center">Visibilidade Fim</th>
+												<th class="align-middle text-center">Status</th>
+												<span
+													sec:authorize="hasRole('ADMIN') || hasRole('ADMINEMP')">
+													<th class="align-middle text-center">Opções</th>
+												</span>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="vaga: ${vagas}">
+												<td class="align-middle text-center" th:text="${vaga.id}"></td>
+												<span sec:authorize="hasRole('ADMIN')">
+													<td class="align-middle text-center"
+													th:text="${vaga.empresa.empresaNome}"></td>
+												</span>
+												<td class="align-middle text-center"
+													th:text="${vaga.codigoSenac}"></td>
+												<td class="align-middle text-center" th:text="${vaga.cargo}"></td>
+												<td class="align-middle text-center"
+													th:text="${#temporals.format(vaga.disponibilidadeInicio, 'dd/MM/yyyy HH:mm')}"></td>
+												<td class="align-middle text-center"
+													th:text="${#temporals.format(vaga.disponibilidadeFim, 'dd/MM/yyyy HH:mm')}"></td>
+												<td class="align-middle text-center"
+													th:text="${vaga.status} ? 'Ativo' : 'Inativo' "></td>
+												<span sec:authorize="hasRole('ADMIN') || hasRole('ADMINEMP')">
+													<td class="align-middle text-center">
+														<a th:href="@{/vaga/alteraVaga/{id}(id=${vaga.id})}">
+															<i class="btn btn-sm btn-primary far fa-edit"></i>
+														</a>
+														<a th:href="@{/vaga/excluirVaga/{id}(id=${vaga.id})}">
+															<i class="btn btn-sm btn-danger fas fa-trash-alt"></i>
+														</a>
+													</td>
+												</span>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- end col -->
+					</div>
+					<!-- end row -->
+				</div>
+				<!-- end container -->
+
+				<th:block th:insert="fragments/footer.html :: footer"></th:block>
+				<!-- end footer -->
+			</div>
+			<!-- End #page-right-content -->
+
+		</div>
+		<!-- end .page-contentbar -->
+	</div>
+	<!-- End #page-wrapper -->
+
+
+	<div id="full-width-modal" class="modal fade myModal" tabindex="-1"
+		role="dialog" aria-labelledby="full-width-modalLabel"
+		aria-hidden="true" style="display: none;">
+		<div class="modal-dialog modal-full">
+			<div class="modal-content">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body">
+					<!-- Modal -->
+					<figure class="highcharts-figure">
+						<div id="containerModal"></div>
+					</figure>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default waves-effect"
+						data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+
+	<!-- App Js -->
+	<script th:src="@{/statics/js/jquery.app.js}"></script>
+	<script th:src="@{/statics/highchart/javascript.js}"></script>
+	<script th:src="@{/statics/highchart/jquery.js}"></script>
+
+	<script th:src="@{/statics/highchart/highcharts.js}"></script>
+	<script th:src="@{/statics/highchart/highcharts-3d.js}"></script>
+	<script th:src="@{/statics/highchart/modules/exporting.js}"></script>
+	<script th:src="@{/statics/highchart/modules/exporting-data.js}"></script>
+	<script th:src="@{/statics/highchart/modules/export-data.js}"></script>
+	<!--
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+	-->
+</body>
+</html>

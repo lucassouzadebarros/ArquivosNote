@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www/thymeleaf.org">
+<th:block th:insert="/../fragments/head.html :: head"></th:block>
+
+
+<!-- estilos curriculo -->
+
+<link href="../statics/css/bootstrap-select.min.css" rel="stylesheet">
+<link src="../statics/etapa-curriculo/relatorio.css" rel="stylesheet">
+<link href="../statics/plugins/switchery/switchery.min.css" rel="stylesheet">
+
+
+
+<body>
+
+<div id="page-wrapper">
+
+    <th:block th:insert="/../fragments/topbar.html :: topbar" />
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+
+        <th:block th:insert="/../fragments/sidebar.html :: sidebar" />
+
+
+        <!-- FORM DADO PESSOAL -->
+        <div id="form-dadoPessoal" style="padding: 20px;">
+            <form th:object="${dadoPessoal}" th:action="@{~/dadoPessoal/salvar}" role="form" method="POST" class="form-validation">
+                <input type="hidden" th:field="*{id}" th:value="*{id}">
+
+
+                <h4 class="m-t-0 header-title"><b>Sobre você:</b></h4>
+
+                <div class="row">
+                    <div class="form-group col-md-8 d-flex">
+                        <label class="col-md-12 control-label">Nome completo <span class="text-danger">*</span> </label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Digite seu nome completo" th:field="*{nomeCompleto}" th:value="*{nomeCompleto}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 d-flex">
+                        <label class="col-md-12 control-label">Data de Nascimento <span class="text-danger">*</span> </label>
+                        <div class="col-md-12">
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="datepicker-autoclose" th:field="*{dataNascimento}" th:value="*{dataNascimento}" required>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-3 d-flex">
+                        <label class="col-md-12 control-label">Deficiência <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <select class="form-control col-md-12" th:field="*{deficiencia}" th:value="*{deficiencia}">
+                                <option th:each="deficiencia : ${deficiencias}" th:value="${deficiencia.id}" th:text="${deficiencia.nome}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-3 d-flex">
+                        <label class="col-md-12 control-label">Estado Civil <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <select class="form-control col-md-12" th:field="*{estatoCivil}" th:value="*{estatoCivil}">
+                                <option th:value="SOLTEIRO">Solteiro</option>
+                                <option th:value="CASADO">Casado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3 d-flex">
+                        <label class="col-md-12 control-label">Sexo <span class="text-danger">*</span></label>
+                        <div class="col-sm-12">
+                            <select class="form-control col-md-12" th:field="*{sexo}" th:value="*{sexo}">
+                                <option th:value="0">MASCULINO</option>
+                                <option th:value="1">FEMININO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-3 d-flex">
+                        <label class="col-md-12 control-label">Número de Dependentes <span class="text-danger">*</span></label>
+
+                        <div class="col-md-12">
+                            <input type="number" min="0" class="form-control" th:field="*{numeroDependentes}" th:value="*{numeroDependentes}" required>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-md-8 d-flex">
+                        <label class="col-md-12 control-label">Email <span class="text-danger">*</span></label>
+                        <div class="col-md-12">
+                            <input type="email" class="form-control" placeholder="Digite seu melhor email !" th:field="*{email}" th:value="*{email}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 d-flex">
+                        <label class="col-md-12 control-label">Celular <span class="text-danger">*</span></label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" data-mask="(00)00000-0000" placeholder="Digite seu melhor número !" th:field="*{celular}" th:value="*{celular}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <hr width="70%" class="my-5">
+
+                <h4 class="m-t-0 header-title"><b>Aonde você mora:</b></h4>
+
+                <div class="row">
+
+                    <div class="form-group col-md-4 d-flex">
+                        <label class="col-md-12 control-label">CEP <span class="text-danger">*</span></label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Digite seu CEP" data-mask="00000-000" th:field="*{cep}" th:value="*{cep}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6 d-flex">
+                        <label class="col-md-12 control-label">Logradouro <span class="text-danger">*</span></label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Digite seu logradouro" th:field="*{logradouro}" th:value="*{logradouro}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-2 d-flex">
+                        <label class="col-md-12 control-label">Número <span class="text-danger">*</span></label>
+                        <div class="col-md-12">
+                            <input type="number" min="0" class="form-control" th:field="*{numeroLogradouro} " th:value="*{numeroLogradouro}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-12 d-flex">
+                        <label class="col-md-12 control-label">Complemento <span class="text-danger">*</span></label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" th:field="*{complementoLogradouro}" th:value="*{complementoLogradouro}" required>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <hr width="70%" class="my-5">
+
+                <h4 class="m-t-0 header-title"><b>Seu objetivo:</b></h4>
+
+                <div class="form-group d-flex col-md-12">
+                    <label class="col-md-12 control-label">Objetivo Profissional</label>
+                    <div class="col-md-12">
+                        <textarea rows="5" class="form-control" th:field="*{objetivoProfissional}" th:value="*{objetivoProfissional}" required></textarea>
+                    </div>
+                </div>
+                <!--
+                        <div class="form-group col-md-12 d-flex">
+                                <label class="col-md-12 control-label">Pretensão Salarial <span class="text-danger"></span></label>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" th:field="*{pretensaoSalarial}" th:value="*{pretensaoSalarial}" required>
+                                </div>
+                            </div>
+
+                         <div class="group col-4">
+                                <input autofocus="autofocus" type="text" required th:field="*{email}">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Cidade</label>
+                            </div> -->
+
+                <!-- <div class="group col-4">
+                                <input autofocus="autofocus" type="text" required th:field="*{email}">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Estado</label>
+                            </div> -->
+
+
+                <div class="d-flex justify-content-between m-b-0">
+
+                    <button type="reset" class="btn btn-default waves-effect">
+                        Cancelar
+                    </button>
+
+                    <button class="btn btn-primary waves-effect waves-light" type="submit">
+                        Salvar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+    <!--
+    <th:block th:insert="/../fragments/footer-scripts.html :: scripts" />
+-->
+</div>
+<!-- scripts Curriculo -->
+<script src="../statics/js/etapa-curriculo/grafico-pizza.js"></script>
+<script src="../statics/js/etapa-curriculo/usuario-autenticado.js"></script>
+<script src="../statics/plugins/bootstrap-multiselect/bootstrap-select.min.js"></script>
+</body>
+
+</html>

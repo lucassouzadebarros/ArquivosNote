@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<th:block th:insert="fragments/head.html :: head"></th:block>
+
+<body>
+<div id="page-wrapper">
+	<!-- Top Bar Start -->
+	<th:block th:insert="fragments/topbar.html :: topbar"></th:block>
+	<!-- Top Bar End -->
+
+	<!-- Page content start -->
+	<div class="page-contentbar">
+		<!--left navigation start-->
+		<th:block th:insert="fragments/sidebar.html :: sidebar"></th:block>
+		<!--left navigation end-->
+
+		<!-- START PAGE CONTENT -->
+		<div id="page-right-content">
+
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-12">
+						<h4 class="m-b-20 header-title">Cadastrar Usuário</h4>
+
+						<form class="form-horizontal" role="form" th:object="${usuario}" th:action="@{/usuario/salvaUsuario}" method="POST">
+							<fieldset>
+								<legend>Dados do usuário</legend>
+								<div class="form-row">
+									<div class="col-md-5 mt-3">
+										<label for="inputCPF">CPF</label>
+										<input autocomplete="off" type="text" id="inputCPF" class="form-control"
+											th:field="*{cpf}" autofocus="autofocus"
+											placeholder="Informe o CPF do usuário" maxlength="11"
+											required="required">
+									</div>
+									<div class="col-md-5 mt-3">
+										<label for="inputNome">Nome Completo</label>
+										<input autocomplete="off" type="text" id="inputNome" class="form-control"
+											th:field="*{nomeCompleto}" autofocus="autofocus"
+											placeholder="Informe o nome completo" maxlength="100"
+											required="required">
+									</div>
+									<div class="col-md-5 mt-3">
+										<label for="inputNome">Politica LGPD</label>
+										<select class="form-control" id="inputLGPD"
+											th:field="*{statuspoliticaLgpd}" required="required">
+											<option th:value="0">Pendente</option>
+											<option th:value="1">Aceitou</option>
+										</select>
+									</div>
+									<div class="col-md-5 mt-3">
+										<label for="inputNome">Versão Politica LGPD</label> <select
+											th:field="*{politicaLgpd}" class="form-control"
+											id="inputLGPDVersao" readonly="readonly">
+										<option th:each="politica : ${politicaLgpd}"
+												th:if="${politica.status == 2}"
+												th:value="${politica.id}" th:text="${politica.versao}"
+												selected="selected"></option>
+									</select>
+									</div>
+									<div class="col-md-5 mt-3">
+										<label>E-mail</label>
+										<input autocomplete="off" type="email" class="form-control" id="inputEmail"
+											   placeholder="Informe o e-mail"
+											   th:field="*{email}" required="required">
+									</div>
+
+									<div class="col-md-5 mt-3">
+										<label>Telefone</label>
+										<input autocomplete="off" type="text" class="form-control" id="inputTelefone"
+											   placeholder="Informe o telefone"
+											   th:field="*{telefone}">
+									</div>
+									<div class="col-md-5 mt-3">
+										<label>Aluno Senac</label>
+										<select class="form-control" id="inputSenac" th:field="*{senac}" required="required">
+											<option th:value="0">Não</option>
+											<option th:value="1">Sim</option>
+										</select>
+									</div>
+									<div class="col-md-5 mt-3">
+										<label>Status</label>
+										<select class="form-control" id="inputStatus" th:field="*{status}" required="required">
+											<option th:value="0">Inativo</option>
+											<option th:value="1">Ativo</option>
+										</select>
+									</div>
+									<div class="col-md-5 mt-3">
+										<label for="senha">Senha</label>
+										<input autocomplete="off" class="form-control" type="password" th:field="*{senha}"
+											required="required" id="senha"
+											placeholder="Senha" maxlength="20">
+									</div>
+									<div hidden="">
+										<select th:field="*{roles}">
+											<option th:each="role : ${roles}"
+													th:if="${role.nomeRole.equals('ROLE_USER')}"
+													th:value="${role.nomeRole}" th:text="${role.nomeRole}"
+													selected="selected"></option>
+										</select>
+									</div>
+								</div>
+							</fieldset>
+							<br/>
+							<br/>
+							<div class="form-group-cadastro">
+								<input type="submit" class="btn btn-cadastro" value="Cadastrar">
+								<a type="button" class="btn btn-cancelar"
+									   th:href="@{/usuario/usuarios}" value="Cancelar">Cancelar</a>
+							</div>
+							</form>
+						</div>
+					</div>
+					<!-- End #page-right-content -->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end container -->
+		<th:block th:insert="fragments/footer.html :: footer"></th:block>
+		<!-- end footer -->
+	</div>
+	<!-- End #page-right-content -->
+</div>
+<!-- end .page-contentbar -->
+</div>
+<!-- End #page-wrapper -->
+
+	<th:block th:insert="fragments/footer-scripts.html :: scripts"></th:block>
+</body>
+</html>

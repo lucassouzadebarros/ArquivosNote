@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- <link href="css/inputStyle.css" rel="stylesheet" />
+    <link href="css/form-line.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/menu.css" rel="stylesheet" /> -->
+
+    <link th:href="@{/css/inputStyle.css}" rel="stylesheet" />
+    <link th:href="@{/css/form-line.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/menu.css}" rel="stylesheet" />
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet" />
+
+    <title>SENAC - Cadastro de currículos</title>
+</head>
+
+<body>
+
+
+    <header id="menu-topo" class="d-flex justify-content-between align-items-center">
+        <div class="header-left">
+
+            <a href="#">
+                <div id="logo">
+                    <img th:src="@{/img/logo-senac.png}" id="logoaqui" />
+                </div>
+            </a>
+
+        </div>
+        <div class="header-rigth">
+            <a href="#" class="mr-3 text-light text-shadow">Ajuda</a>
+            <div class="icon-perfil mr-3">JP</div>
+
+            <!-- MENU HAMBURGUER -->
+            <div class="icon-hamburger ml-3 d-none"></div>
+            <div id="hamburger" class="d-none">
+                <span></span> <span></span> <span></span>
+            </div>
+
+        </div>
+    </header>
+
+    <nav class="menu-lateral">
+        <button>
+			<img th:src="@{/icons/stands.svg}">
+			<p>Stands</p>
+		</button>
+        <button>
+			<img th:src="@{/icons/empresa.svg}">
+			<p>Empresas</p>
+		</button>
+        <button>
+			<img th:src="@{/icons/evento.svg}">
+			<p>Eventos</p>
+		</button>
+        <button>
+			<img th:src="@{/icons/vagas.svg}">
+			<p>Vagas</p>
+		</button>
+        <button>
+			<img th:src="@{/icons/curriculo.svg}">
+			<p>Curriculo</p>
+		</button>
+    </nav>
+
+    <div id="menu-mobile" class="d-none">
+        <div id="bg-menu-mobile"></div>
+
+        <ul id="menu-mobile-ul">
+            <li><img th:src="@{/icons/stands.svg}">
+                <p class="">Stands</p>
+            </li>
+            <li><img th:src="@{/icons/empresa.svg}">
+                <p>Empresas</p>
+            </li>
+            <li><img th:src="@{/icons/evento.svg}">
+                <p>Eventos</p>
+            </li>
+            <li><img th:src="@{/icons/vagas.svg}">
+                <p>Vagas</p>
+            </li>
+            <li><img th:src="@{/icons/curriculo.svg}">
+                <p>Curriculo</p>
+            </li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div id="view">
+        <div class="content p-1 ml-3 mr-3">
+            <div class="list-group-item">
+                <form class="form-horizontal p-3" th:object="${curriculo}" th:action="@{/curriculo/alterar}" method="POST">
+                    <div class="form-group identificador-form">
+                        <div class="form-row">
+                            <span class="col-12">
+						<h1 class="text-uppercase text-right" th:text="*{dadoPessoal.nomeCompleto}"></h1>
+					</span>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <p class="linha dadosPessoais text-right mb-0" th:text="*{dadoPessoal.logradouro + ', ' + dadoPessoal.numeroLogradouro + ', ' + dadoPessoal.complementoLogradouro}"></p>
+                                <p class="linha dadosPessoais text-right mb-0" type="" name="funcidade" id="" th:text="*{'Cep: ' + dadoPessoal.cep}"></p>
+                                <p class="linha dadosPessoais text-right mb-0" th:text="*{'Contato: ' + dadoPessoal.celular}"></p>
+                                <p class="linha dadosPessoais text-right mb-0" type="" name="funestado" id="" th:text="*{'E-mail: ' + dadoPessoal.email}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="">
+                                <h2 class="display-4 titulo font-weight-bold">Objetivo</h2>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <p class="font20px linha" type="" name="funnivel" id="" th:text="*{dadoPessoal.objetivoProfissional}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="">
+                                <h2 class="display-4 titulo font-weight-bold">Formação Acadêmica</h2>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group" th:each="formacaoAcademica : *{formacoesAcademicas}">
+                                <p class="font20px linha mb-0" type="" name="funinstituicao" id="" th:text="${formacaoAcademica.instituicao}"></p>
+                                <p class="font20px linha mb-0" type="" name="funnivel" id="" th:text="${formacaoAcademica.nivelInstrucao.descricao}"></p>
+                                <p class="font20px linha mb-0" type="" name="funcurso" id="" th:text="${formacaoAcademica.curso}"></p>
+                                <p class="font20px linha mb-0" type="" name="funconclusao" id="" th:text="${formacaoAcademica.status}"></p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-row">
+                            <div class="">
+                                <h2 class="display-4 titulo font-weight-bold">Experiência Profissional</h2>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-8" th:each="experienciaProfissional : *{experienciasProfissionais}">
+                                <p class="font20px linha mb-0" type="" name="funempresa" id="" th:text="${experienciaProfissional.empresa}"></p>
+                                <p class="font20px linha mb-0" type="" name="funempresa" id="" th:text="${'Cargo: ' + experienciaProfissional.descricao}"></p>
+                                <p class="font20px linha mb-0" type="" name="funinicio" id="" th:text="${'Período: ' + #dates.format(experienciaProfissional.dataInicio, 'dd/MM/yyyy') + ' até ' + #dates.format(experienciaProfissional.dataFim, 'dd/MM/yyyy')}"></p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-row">
+                            <div class="">
+                                <h2 class="display-4 titulo font-weight-bold">Informações Complementares</h2>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-8" th:each="informacaoAdicional : *{informacoesAdicionais}">
+                                <p class="font20px linha mb-0" type="" name="funempresa" id="" th:text="${'Descrição: ' + informacaoAdicional.descricao}"></p>
+                                <p class="font20px linha mb-0" type="" name="funempresa" id="" th:text="${'Valor: ' + informacaoAdicional.valor}"></p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-row">
+                            <div class="">
+                                <h2 class="display-4 titulo font-weight-bold">Mídia</h2>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-8" th:each="linkExterno : *{linksExternos}">
+                                <p class="font20px linha mb-0" type="" name="funempresa" id="" th:text="${'Descrição: ' + linkExterno.descricao}"></p>
+                                <p class="font20px linha mb-0" type="" name="funempresa" id="" th:text="${'Valor: ' + linkExterno.valor}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p class="text-light text-shadow">© Copyright Senac RJ 2020 Todos os direitos reservados</p>
+    </footer>
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+    <!-- <script src="js/script.js"></script>
+    <script src="js/menu.js"></script> -->
+
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    <script type="text/javascript" th:src="@{/js/menu.js}"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+
+</html>

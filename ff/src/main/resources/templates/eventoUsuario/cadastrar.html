@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feira Virtual SENAC 2020 | Projeto Integrador Template</title>
+    <th:block th:insert="~{/fragments/head :: head}"></th:block>
+    <!-- Sweet-Alert  -->
+    <link th:href="@{/statics/plugins/sweet-alert2/sweetalert2.min.css}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div id="page-wrapper">
+
+    <!-- Top Bar Start -->
+    <th:block th:insert="~{/fragments/topbar :: topbar}"></th:block>
+    <!-- Top Bar End -->
+
+    <!-- Page content start -->
+    <div class="page-contentbar">
+        <!--left navigation start-->
+        <th:block th:insert="~{/fragments/sidebar :: sidebar}"></th:block>
+        <!--left navigation end-->
+        <!-- START PAGE CONTENT -->
+        <div id="page-right-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="m-b-20 header-title">Cadastrar Usuário no Evento</h4>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger alert-dismissible fade in" role="alert" style="display: none;" id="msgInputs">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Preencha todos os campos marcados com *</strong>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="p-20 m-b-20">
+                            <form id="formCadastro" class="form-validation" th:object="${eventoUsuarioDomain}" th:action="@{/eventoUsuario/salvar}" method="POST">
+                                <div class="form-group">
+                                    <label>Data da entrada do usuario no evento:<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control datepicker" id="daterange" th:field="*{dataRegistro}" required readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>Link do Certificado:</label>
+                                    <input type="url" th:field="*{linkCertificado}" id="linkCertificado" class="form-control" placeholder="Digite o link do certificado - Ex.: https://www.link.com.br">
+                                </div>
+                                <div class="form-group">
+                                    <label>Selecione o Usuário:<span class="text-danger">*</span></label>
+                                    <select th:field="*{usuario}" id="usuario" class="form-control select" required>
+                                        <option value="" hidden selected>Selecionar</option>
+                                        <option th:each="usuarioDomain: ${usuarioDomainList}" th:value="${usuarioDomain.Id}" th:text="${usuarioDomain.nomeCompleto}" />
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Selecione o Evento:<span class="text-danger">*</span></label>
+                                    <select th:field="*{evento}" id="evento" class="form-control select" required>
+                                        <option value="" hidden selected>Selecionar</option>
+                                        <option th:each="eventoDomain: ${eventoDomainList}" th:value="${eventoDomain.Id}" th:text="${eventoDomain.eventoTitulo}" />
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status:<span class="text-danger">*</span></label>
+                                    <select th:field="*{status}" id="status" class="form-control select" required>
+                                        <option value="1" selected>Ativo</option>
+                                        <option value="0">Inativo</option>
+                                    </select>
+                                </div>
+                                <div class="form-group text-right m-b-0">
+                                    <button type="submit" id="btnSubmit" class="btn btn-primary waves-effect waves-light">
+                                        Cadastrar Usuario no Evento
+                                    </button>
+                                    <a th:href="@{/evento/listar}" class="btn btn-default waves-effect m-l-5">
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+        <!-- begin footer -->
+        <th:block th:insert="~{/fragments/footer :: footer}"></th:block>
+        <!-- end footer -->
+    </div>
+    <!-- End #page-right-content -->
+
+</div>
+<!-- end .page-contentbar -->
+<!-- End #page-wrapper -->
+<th:block th:insert="~{/fragments/footer-scripts :: scripts}"></th:block>
+<!-- Sweet-Alert  -->
+<script th:src="@{/statics/pages/jquery.sweet-alert.init.js}"></script>
+<script th:src="@{/statics/plugins/sweet-alert2/sweetalert2.min.js}"></script>
+<script>
+
+</script>
+</body>
+</html>

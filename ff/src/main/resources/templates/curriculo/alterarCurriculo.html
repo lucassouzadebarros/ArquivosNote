@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Alterar Curriculo</title>
+  </head>
+  <body>
+
+	<div class="container">
+		<div class="panel-heading my-3" align="center">
+			<strong>ALTERAÇÃO CURRICULO</strong>
+		</div>
+		
+		<div class="panel-body">
+			<form class="form-horizontal p-3" th:object="${curriculo}" th:action="@{/curriculo/alterar}"
+			method="POST">
+				<div class="form-group">
+			<fieldset>
+						
+						<h3>Titulo do currículo</h3>
+						
+						<div class="row">
+							<div class="form-group col-12 d-none">
+								<label>ID</label>
+								<input type="text" class="form-control input-sm" th:field="*{id}"
+								autofocus="autofocus" placeholder="Ex: Curriculo para vaga front-end"/>
+							</div>
+							<div class="form-group col-12">
+								<label>NOME</label>
+								<input type="text" class="form-control input-sm" th:field="*{nome}"
+								autofocus="autofocus" placeholder="Ex: Curriculo para vaga front-end"/>
+							</div>
+						</div>
+						
+						<hr class="row my-3">
+						
+						<h3>Dados Pessoais</h3>
+						<div class="row">
+							<div class="form-group col-12">
+								<label>NOME COMPLETO</label>
+								<input type="text" class="form-control input-sm" th:field="*{dadoPessoal.nomeCompleto}"
+								autofocus="autofocus" placeholder="Digite seu nome completo"/>
+							</div>
+							<div class="form-group col-12">
+								<label>EMAIL</label>
+								<input type="text" class="form-control input-sm" th:field="*{dadoPessoal.email}"
+								autofocus="autofocus" placeholder="Digite seu email"/>
+							</div>
+						</div>
+
+						<hr class="row my-3">
+
+						<h3>Formação Acadêmica</h3>
+						<div class="row">
+							<div class="form-group col-12 d-none">
+								<label>ID</label>
+								<input type="text" class="form-control input-sm" th:field="*{formacoesAcademicas[0].id}"
+								autofocus="autofocus" placeholder="Ex: Curriculo para vaga front-end"/>
+							</div>
+							<div class="form-group col-12">
+								<label>INSTITUIÇÃO</label>
+								<input type="text" class="form-control input-sm" th:field="*{formacoesAcademicas[0].instituicao}"
+								autofocus="autofocus" placeholder="Digite o nome da sua instituicao"/>
+							</div>
+							<div class="form-group col-12">
+								<label>CURSO</label>
+								<input type="text" class="form-control input-sm" th:field="*{formacoesAcademicas[0].curso}"
+								autofocus="autofocus" placeholder="Digite o curso"/>
+							</div>
+
+							<div class="form-group col-6">
+								<label>STATUS</label>
+								<select th:field="*{formacoesAcademicas[0].status}">
+									<option th:value="FORMADO">FORMADO</option>
+									<option th:value="EM_FORMACAO">EM FORMAÇÃO</option>
+								</select>
+							</div>
+
+							<div class="form-group col-6">
+								<label>TIPO DE FORMAÇÃO</label>
+								<select th:field="*{formacoesAcademicas[0].nivelInstrucao.descricao}">
+									<option th:value="TECNOLOGO">TECNÓLOGO</option>
+									<option th:value="TECNICO">TÉCNICO</option>
+								</select>
+							</div>
+						</div>
+						
+						<hr class="row my-3">
+
+
+						<h3>Experiências Profissionais</h3>
+						<div class="row">
+						<div class="form-group col-12 d-none">
+								<label>ID</label>
+								<input type="text" class="form-control input-sm" th:field="*{experienciasProfissionais[0].id}"
+								autofocus="autofocus" placeholder="Ex: Curriculo para vaga front-end"/>
+							</div>
+							<div class="form-group col-12">
+								<label>EMPRESA</label>
+								<input type="text" class="form-control input-sm" th:field="*{experienciasProfissionais[0].empresa}"
+								autofocus="autofocus" placeholder="Digite o nome da empresa"/>
+							</div>
+							<div class="form-group col-12">
+								<label>DESCRICAO</label>
+								<input type="text" class="form-control input-sm" th:field="*{experienciasProfissionais[0].descricao}"
+								autofocus="autofocus" placeholder="Descreva sua experiência"/>
+							</div>
+						</div>
+						
+						<hr class="row my-3">
+						
+						
+						<h3>Links Externo</h3>
+						<div class="row">
+						<div class="form-group col-12 d-none">
+								<label>ID</label>
+								<input type="text" class="form-control input-sm" th:field="*{linksExternos[0].id}"
+								autofocus="autofocus" placeholder="Ex: Curriculo para vaga front-end"/>
+							</div>
+							<div class="form-group col-12">
+								<label>DESCRICAO</label>
+								<input type="text" class="form-control input-sm" th:field="*{linksExternos[0].descricao}"
+								autofocus="autofocus" placeholder="Ex: Linkedin"/>
+							</div>
+							 <div class="form-group col-12">
+								<label>VALOR</label>
+								<input type="text" class="form-control input-sm" th:field="*{linksExternos[0].valor}"
+								autofocus="autofocus" placeholder="Ex: linkedin.com/senac-rj"/>
+							</div>
+						</div>
+						
+						<hr class="row my-3">
+
+						<h3>Informações Adicionais</h3>
+						<div class="row">
+						<div class="form-group col-12 d-none">
+								<label>ID</label>
+								<input type="text" class="form-control input-sm" th:field="*{informacoesAdicionais[0].id}"
+								autofocus="autofocus" placeholder="Ex: Curriculo para vaga front-end"/>
+							</div>
+							<div class="form-group col-12">
+								<label>DESCRICAO</label>
+								<input type="text" class="form-control input-sm" th:field="*{informacoesAdicionais[0].descricao}"
+								autofocus="autofocus" placeholder="Ex: Projetos pessoais, auxilio social, github..."/>
+							</div>
+							<div class="form-group col-12">
+								<label>LOCALIZAÇÃO</label>
+								<input type="text" class="form-control input-sm" th:field="*{informacoesAdicionais[0].valor}"
+								autofocus="autofocus" placeholder="Ex: Link dos seus projetos"/>
+							</div>
+						</div>
+
+
+						
+
+					</fieldset>
+				</div>
+				<div align="center">
+					<button type="submit" class="btn btn-sm btn-success">SALVAR</button>
+					<a th:href="@{/curriculo/listarCurriculos}" class="btn btn-sm btn-danger">CANCELAR</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
